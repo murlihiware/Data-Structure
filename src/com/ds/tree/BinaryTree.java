@@ -1,4 +1,4 @@
-package com.ds;
+package com.ds.tree;
 
 import java.util.ArrayList;
 import java.util.Queue;
