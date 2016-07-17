@@ -13,16 +13,47 @@ public class BinaryTree {
 
 	static int count=0;
 	/**
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
 		BinaryTreeNode root = createBinaryTree();
-		levelOrderDisplay(root);
-		kthNode(root,9);
+		int maxValue = findMaxInBinaryTree(root);
+		System.out.println("Max Value:"+maxValue);
 	}
 	
 	public static BinaryTreeNode createBinaryTree()
+	{
+		BinaryTreeNode root = new BinaryTreeNode(1);
+		root.leftChild = new BinaryTreeNode(4);
+		root.rightChild = new BinaryTreeNode(2);
+		
+		root.leftChild.leftChild = new BinaryTreeNode(6);
+		root.leftChild.rightChild = new BinaryTreeNode(5);
+		
+		root.rightChild.leftChild = new BinaryTreeNode(3);
+		root.rightChild.rightChild = new BinaryTreeNode(0);
+	    return root;
+	}
+	
+	public static int findMaxInBinaryTree(BinaryTreeNode root)
+ {
+		int maxValue = Integer.MIN_VALUE;
+		if (root == null)
+			return maxValue;
+		int leftMaxValue = findMaxInBinaryTree(root.leftChild);
+		int rightMaxValue = findMaxInBinaryTree(root.rightChild);
+		if (leftMaxValue > rightMaxValue)
+			maxValue = leftMaxValue;
+		else
+			maxValue = rightMaxValue;
+		if (root.data > maxValue)
+			maxValue = root.data;
+		return maxValue;
+	}
+	
+	public static BinaryTreeNode createBinarySearchTree()
 	{
 		BinaryTreeNode root = new BinaryTreeNode(10);
 		root.leftChild = new BinaryTreeNode(6);
@@ -35,6 +66,7 @@ public class BinaryTree {
 		root.rightChild.rightChild = new BinaryTreeNode(16);
 	    return root;
 	}
+	
 	
 	public static void addElement(int data)
 	{
@@ -120,16 +152,20 @@ public class BinaryTree {
 		return null;
 	}
 	
-	public static void kthNode(BinaryTreeNode root, int k)
+	public static int kthNode(BinaryTreeNode root, int k)
  {
-		if (root == null || count>=k)
-			return ;
-		kthNode(root.rightChild, k);
-		count++;
-		if (count == k)
-			System.out.println(root.data);
+		if (root == null)
+			return -1;
 		else
-		kthNode(root.leftChild, k);
+		{
+			int result = kthNode(root.rightChild, k);	
+			if(result!=-1)
+				return result;
+			count++;
+			if(count==k)
+				return root.data;
+			return kthNode(root.leftChild, k);
+		}
 		
 	}
 	
