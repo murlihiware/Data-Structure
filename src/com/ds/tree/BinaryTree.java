@@ -20,8 +20,9 @@ public class BinaryTree {
 	public static void main(String[] args) {
 
 		BinaryTreeNode root = createBinaryTree();
-		boolean searchResult = searchBinaryTree(root, 10);
-		System.out.println("Search Result:" + searchResult);
+//		boolean searchResult = searchBinaryTree(root, 10);
+		int size = size(root);
+		System.out.println("Size:" + size);
 	}
 
 	public static BinaryTreeNode createBinaryTree() {
@@ -50,6 +51,12 @@ public class BinaryTree {
 		if (root.data > maxValue)
 			maxValue = root.data;
 		return maxValue;
+	}
+	
+	public static int size(BinaryTreeNode root) {
+		if (root == null)
+			return 0;
+		return 1 + size(root.leftChild) + size(root.rightChild);
 	}
 	
 	public static boolean searchBinaryTree(BinaryTreeNode root, int key) {
