@@ -21,8 +21,9 @@ public class BinaryTree {
 
 		BinaryTreeNode root = createBinaryTree();
 //		boolean searchResult = searchBinaryTree(root, 10);
-		int size = size(root);
-		System.out.println("Size:" + size);
+		levelOrderDisplay(root);
+		int diameter = diameter(root);
+		System.out.println("Diameter:" + diameter);
 	}
 
 	public static BinaryTreeNode createBinaryTree() {
@@ -31,11 +32,45 @@ public class BinaryTree {
 		root.rightChild = new BinaryTreeNode(2);
 
 		root.leftChild.leftChild = new BinaryTreeNode(6);
+		root.leftChild.leftChild.leftChild = new BinaryTreeNode(7);
+		root.leftChild.leftChild.leftChild = new BinaryTreeNode(10);
 		root.leftChild.rightChild = new BinaryTreeNode(5);
+		root.leftChild.rightChild.rightChild = new BinaryTreeNode(9);
+		root.leftChild.rightChild.rightChild.rightChild = new BinaryTreeNode(11);
 
-		root.rightChild.leftChild = new BinaryTreeNode(3);
-		root.rightChild.rightChild = new BinaryTreeNode(0);
+//		root.rightChild.leftChild = new BinaryTreeNode(3);
+//		root.rightChild.rightChild = new BinaryTreeNode(0);
 		return root;
+	}
+	
+	public static int diameter(BinaryTreeNode root)
+ {
+		int diameter = 0;
+		if (root == null)
+			return diameter;
+		int rootDiameter = 1 + height(root.leftChild) + height(root.rightChild);
+		int leftDiameter = 1 + diameter(root.leftChild);
+		int rightDiameter = 1 + diameter(root.rightChild);
+
+		if (leftDiameter >= rightDiameter)
+			diameter = leftDiameter;
+		else
+			diameter = rightDiameter;
+		if (rootDiameter > diameter)
+			diameter = rootDiameter;
+		return diameter;
+	}
+	
+	public static int height(BinaryTreeNode root)
+	{
+		if(root==null)
+			return 0;
+		int leftHeight = 1+ height(root.leftChild);
+		int rightHeight = 1 + height(root.rightChild);
+		if(leftHeight>rightHeight)
+			return leftHeight;
+		else
+			return rightHeight;
 	}
 
 	public static int findMaxInBinaryTree(BinaryTreeNode root) {
