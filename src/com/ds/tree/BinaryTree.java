@@ -19,11 +19,14 @@ public class BinaryTree {
 	 */
 	public static void main(String[] args) {
 
-		BinaryTreeNode root = createBinaryTree();
+//		BinaryTreeNode root = createBinaryTree();
+		BinaryTreeNode root = createBinarySearchTree();
 //		boolean searchResult = searchBinaryTree(root, 10);
 		levelOrderDisplay(root);
-		int diameter = diameter(root);
-		System.out.println("Diameter:" + diameter);
+		mirrorOfBinaryTree(root);
+		levelOrderDisplay(root);
+//		int diameter = diameter(root);
+//		System.out.println("Diameter:" + diameter);
 	}
 
 	public static BinaryTreeNode createBinaryTree() {
@@ -41,6 +44,20 @@ public class BinaryTree {
 //		root.rightChild.leftChild = new BinaryTreeNode(3);
 //		root.rightChild.rightChild = new BinaryTreeNode(0);
 		return root;
+	}
+	
+	public static void mirrorOfBinaryTree(BinaryTreeNode root)
+	{
+		if(root==null)
+			return;
+		if(root.leftChild!=null || root.rightChild!=null)
+		{
+			BinaryTreeNode temp = root.leftChild;
+			root.leftChild =root.rightChild;
+			root.rightChild = temp;
+			mirrorOfBinaryTree(root.leftChild);
+			mirrorOfBinaryTree(root.rightChild);
+		}
 	}
 	
 	public static int diameter(BinaryTreeNode root)
