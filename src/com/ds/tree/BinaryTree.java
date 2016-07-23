@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * @author Murli
+ * Problems from Data Structures and Algorithms book by Narasimha
  *
  */
 public class BinaryTree {
@@ -19,16 +20,43 @@ public class BinaryTree {
 	 */
 	public static void main(String[] args) {
 
-//		BinaryTreeNode root = createBinaryTree();
-		BinaryTreeNode root = createBinarySearchTree();
+		BinaryTreeNode root = constructBT(new char[]{'I','L','I','L','L'},0);
+//		BinaryTreeNode root = createBinarySearchTree();
 //		boolean searchResult = searchBinaryTree(root, 10);
 		levelOrderDisplay(root);
-		mirrorOfBinaryTree(root);
-		levelOrderDisplay(root);
+//		mirrorOfBinaryTree(root);
+//		levelOrderDisplay(root);
 //		int diameter = diameter(root);
 //		System.out.println("Diameter:" + diameter);
 	}
 
+	/**
+	 * Problem no. 38
+	 * @param preorder
+	 * @param count
+	 * @return
+	 */
+	public static BinaryTreeNode constructBT(char []preorder, int count)
+	{
+		BinaryTreeNode root = null;
+		if(count==preorder.length)
+			return root;
+		if(preorder[count]=='L')
+           return new BinaryTreeNode(7);
+           
+		if(preorder[count]=='I')
+		{
+			root = new BinaryTreeNode(1);
+			if((count+2) <= preorder.length)
+            {
+             count = count+1;
+			 root.leftChild = constructBT(preorder, count);
+             count+=1;
+			 root.rightChild = constructBT(preorder,count);
+			}
+		}
+		return root;
+	}
 	public static BinaryTreeNode createBinaryTree() {
 		BinaryTreeNode root = new BinaryTreeNode(1);
 		root.leftChild = new BinaryTreeNode(4);
