@@ -20,10 +20,12 @@ public class BinaryTree {
 	 */
 	public static void main(String[] args) {
 
-		BinaryTreeNode root = constructBT(new char[]{'I','L','I','L','L'},0);
-//		BinaryTreeNode root = createBinarySearchTree();
+//		BinaryTreeNode root = constructBT(new char[]{'I','L','I','L','L'},0);
+		BinaryTreeNode root = createBinarySearchTree();
+//		BinaryTreeNode root = createBinaryTree();
 //		boolean searchResult = searchBinaryTree(root, 10);
-		levelOrderDisplay(root);
+        levelOrderRecurSive(root);
+		//		levelOrderDisplay(root);
 //		mirrorOfBinaryTree(root);
 //		levelOrderDisplay(root);
 //		int diameter = diameter(root);
@@ -57,6 +59,34 @@ public class BinaryTree {
 		}
 		return root;
 	}
+	
+	public static void levelOrderRecurSive(BinaryTreeNode root)
+	{
+	 int height = height(root);
+	 
+	 for(int i=1;i<=height;i++)
+	 {
+		 levelOrderRec(root, i);
+		 System.out.println();
+	 }
+	}
+	
+	public static void levelOrderRec(BinaryTreeNode root, int level)
+	{
+	 if(level ==1)
+	 {
+			if (root != null)
+				System.out.print(root.data+ " ");
+	 }
+	 else
+	 {
+		 levelOrderRec(root.leftChild, level-1);
+		 levelOrderRec(root.rightChild, level-1);
+	 }
+		 
+	}
+	
+	
 	public static BinaryTreeNode createBinaryTree() {
 		BinaryTreeNode root = new BinaryTreeNode(1);
 		root.leftChild = new BinaryTreeNode(4);
@@ -69,8 +99,8 @@ public class BinaryTree {
 		root.leftChild.rightChild.rightChild = new BinaryTreeNode(9);
 		root.leftChild.rightChild.rightChild.rightChild = new BinaryTreeNode(11);
 
-//		root.rightChild.leftChild = new BinaryTreeNode(3);
-//		root.rightChild.rightChild = new BinaryTreeNode(0);
+		root.rightChild.leftChild = new BinaryTreeNode(3);
+		root.rightChild.rightChild = new BinaryTreeNode(0);
 		return root;
 	}
 	
