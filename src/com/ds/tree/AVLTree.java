@@ -15,6 +15,89 @@ public class AVLTree {
 	public static void main(String[] args) {
 
 	}
+	
+	public static AVLTreeNode createAVLTree()
+	{
+	 AVLTreeNode root = new AVLTreeNode(null, null, 10, 1);	
+	 return root;
+	}
+	
+	public static void insert(AVLTreeNode parent,int data, int height)
+	{
+	    if(parent==null)
+	    {
+	    	parent = new AVLTreeNode();
+	    	parent.setData(data);
+	    	parent.setHeight(1);
+	    	return;
+	    }
+		
+		if (data< parent.getData())
+		{
+			insert(parent.getLeftChild(), data, parent.getHeight() + 1);
+			int diff = height(parent.getLeftChild()) - height(parent.getRightChild());
+			if(Math.abs(diff)==2)
+			{
+				if(data<parent.getLeftChild().getData())
+				{
+					parent = singleLLRotation(parent);
+				}
+				else
+				{
+					parent = doubleLRRotation(parent);		
+				}
+			}
+		}
+		else if (data > parent.getData())
+		{
+			insert(parent.getRightChild(), data, parent.getHeight() + 1);
+			int diff = height(parent.getLeftChild()) - height(parent.getRightChild());
+			if(Math.abs(diff)==2)
+			{
+				if (data > parent.getRightChild().getData())
+					parent = singleRRRotation(parent);
+				else
+					parent = doubleRLRotation(parent);
+			}
+		}
+	}
+	
+	public static int height(AVLTreeNode node)
+	
+	{
+		if(node==null)
+			return 0;
+		return node.getHeight();
+	}
+	
+	public static AVLTreeNode singleLLRotation(AVLTreeNode root)
+	{
+		AVLTreeNode temp = root.getLeftChild();
+		root.setRightChild(temp.getLeftChild());
+		temp.setLeftChild(root);
+		
+		root.setHeight(Math.max(height(root.getLeftChild()), height(root.getRightChild())) + 1);
+		temp.setHeight(Math.max(height(temp.getLeftChild()), height(temp.getRightChild())) + 1);
+		return temp;
+	}
+	
+	public static AVLTreeNode singleRRRotation(AVLTreeNode root)
+	{
+		
+		return null;
+	}
+	
+	public static AVLTreeNode doubleLRRotation(AVLTreeNode root)
+	{
+		
+		return null;
+	}
+	
+	public static AVLTreeNode doubleRLRotation(AVLTreeNode root)
+	{
+		
+		return null;
+	}
 
 }
 
