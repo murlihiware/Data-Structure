@@ -70,21 +70,27 @@ public class AVLTree {
 		return node.getHeight();
 	}
 	
-	public static AVLTreeNode singleLLRotation(AVLTreeNode root)
+	public static AVLTreeNode singleRRRotation(AVLTreeNode root)
 	{
 		AVLTreeNode temp = root.getLeftChild();
-		root.setRightChild(temp.getLeftChild());
-		temp.setLeftChild(root);
+		root.setLeftChild(temp.getRightChild());
+		temp.setRightChild(root);
 		
 		root.setHeight(Math.max(height(root.getLeftChild()), height(root.getRightChild())) + 1);
 		temp.setHeight(Math.max(height(temp.getLeftChild()), height(temp.getRightChild())) + 1);
 		return temp;
 	}
 	
-	public static AVLTreeNode singleRRRotation(AVLTreeNode root)
+	public static AVLTreeNode singleLLRotation(AVLTreeNode root)
 	{
 		
-		return null;
+		AVLTreeNode temp = root.getRightChild();
+		root.setRightChild(temp.getLeftChild());
+		temp.setLeftChild(root);
+		
+		root.setHeight(Math.max(height(root.getLeftChild()), height(root.getRightChild())) + 1);
+		temp.setHeight(Math.max(height(temp.getLeftChild()), height(temp.getRightChild())) + 1);
+		return temp;
 	}
 	
 	public static AVLTreeNode doubleLRRotation(AVLTreeNode root)
