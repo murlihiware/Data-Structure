@@ -5,7 +5,7 @@ package com.ds.tree;
 
 /**
  * @author Murli 
- * This Class is implements different operation supported by AVL Tree
+ * This Class implements different operation supported by AVL Tree
  */
 public class AVLTree {
 
