@@ -114,7 +114,7 @@ public class AVLTree {
 		return node.getHeight();
 	}
 	
-	public static AVLTreeNode singleRRRotation(AVLTreeNode root)
+	public static AVLTreeNode singleLLRotation(AVLTreeNode root)
 	{
 		AVLTreeNode temp = root.getLeftChild();
 		root.setLeftChild(temp.getRightChild());
@@ -125,7 +125,7 @@ public class AVLTree {
 		return temp;
 	}
 	
-	public static AVLTreeNode singleLLRotation(AVLTreeNode root)
+	public static AVLTreeNode singleRRRotation(AVLTreeNode root)
 	{
 		
 		AVLTreeNode temp = root.getRightChild();
