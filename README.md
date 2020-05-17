@@ -1,1 +1,1 @@
-# This Repository provides implementations of different ADT's in java
+# This Repository provides implementations of different ADT's using java
